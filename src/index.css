@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --color-background: #0f172a;
+  --color-foreground: #f8fafc;
+  --color-dot: #e2e8f0;
+}
+
+@layer base {
+  body {
+    background-image: radial-gradient(circle, var(--color-dot) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
