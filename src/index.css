@@ -12,12 +12,30 @@
 }
 
 @layer base {
-  body {
-    background-image: radial-gradient(circle, var(--color-dot) 1px, transparent 1px);
-    background-size: 24px 24px;
+  html {
+    background-color: white;
+    overscroll-behavior: none;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
   }
 
-  html {
-    scroll-behavior: smooth;
+  html.dark {
+    background-color: #0f172a;
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: white;
+    background-image: radial-gradient(circle, var(--color-dot) 1px, transparent 1px);
+    background-size: 24px 24px;
+    overscroll-behavior: none;
+  }
+
+  html.dark body {
+    background-color: #0f172a;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
   }
 }

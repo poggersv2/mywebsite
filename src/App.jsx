@@ -27,12 +27,12 @@ function App() {
       <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-white transition-colors duration-300">
 
         {/* Navbar */}
-        <div id="about" className="relative">
-        <div className="flex text-2xl justify-between items-center p-10 border-b border-slate-200 dark:border-slate-700 transition-colors duration-300">
-          <div className="font-bold transition-opacity duration-300 hover:opacity-70">lee.dev</div>
+        <div className="sticky top-0 z-50 p-4">
+        <div className="mx-4 flex items-center justify-between rounded-full border border-slate-200/70 bg-white/70 px-8 py-5 text-2xl backdrop-blur-md transition-colors duration-300 dark:border-slate-700/70 dark:bg-slate-900/70">
+          <div className="font-bold transition-opacity duration-300 hover:opacity-70 cursor-pointer"><a href="#about">lee.dev</a></div>
 
           {/* Desktop Nav */}
-          <div className="hidden sm:flex items-center gap-6">
+          <div className="hidden sm:flex items-center gap-6 ">
             <a href="#about" className="hover:opacity-70 transition-opacity duration-200">about me</a>
             <a href="#projects" className="hover:opacity-70 transition-opacity duration-200">projects</a>
             <a href="#contact" className="hover:opacity-70 transition-opacity duration-200">contact</a>
@@ -76,7 +76,7 @@ function App() {
       </div>
 
         {/* Hero */}
-        <div className="flex items-center justify-center px-4 sm:px-[10vh] min-h-[calc(100vh-200px)]">
+        <div id="about" className="flex items-center justify-center px-4 sm:px-[10vh] min-h-[calc(100vh-200px)]">
           <div className="flex max-w-full flex-col items-start gap-2 text-left">
             <div className="font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl my-4">Hey there, I'm Lee!</div>
             <div className="text-2xl sm:text-5xl mt-2">I like playing minecraft</div>
