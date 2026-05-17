@@ -9,6 +9,17 @@
   --color-background: #0f172a;
   --color-foreground: #f8fafc;
   --color-dot: #e2e8f0;
+  --animate-infinite-scroll: infinite-scroll 25s linear infinite;
+}
+
+@keyframes infinite-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
 }
 
 @layer base {

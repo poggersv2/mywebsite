@@ -1,4 +1,11 @@
 import { useState } from "react";
+import csharpLogo from "./assets/csharp_logo.svg";
+import cppLogo from "./assets/c++_logo.svg";
+import dockerLogo from "./assets/docker_logo.svg";
+import html5Logo from "./assets/html5_logo.svg";
+import kotlinLogo from "./assets/kotlin_logo.svg";
+import powershellLogo from "./assets/powershell_logo.svg";
+import pythonLogo from "./assets/python_logo.svg";
 
 const MoonIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" className="fill-slate-900 dark:fill-white transition-colors duration-300">
@@ -23,11 +30,11 @@ function App() {
   };
 
   return (
-    <main>
+    <main id="about">
       <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-white transition-colors duration-300">
 
         {/* Navbar */}
-        <div className="sticky top-0 z-50 p-4">
+        <div className="sticky top-0 z-50 pt-[2vh] px-[1vh] sm:px-[10vh]">
         <div className="mx-4 flex items-center justify-between rounded-full border border-slate-200/70 bg-white/70 px-8 py-5 text-2xl backdrop-blur-md transition-colors duration-300 dark:border-slate-700/70 dark:bg-slate-900/70">
           <div className="font-bold transition-opacity duration-300 hover:opacity-70 cursor-pointer"><a href="#about">lee.dev</a></div>
 
@@ -76,7 +83,7 @@ function App() {
       </div>
 
         {/* Hero */}
-        <div id="about" className="flex items-center justify-center px-4 sm:px-[10vh] min-h-[calc(100vh-200px)]">
+        <div className="flex items-center justify-center px-[1vh] sm:px-[10vh] min-h-[calc(100vh-300px)]">
           <div className="flex max-w-full flex-col items-start gap-2 text-left">
             <div className="font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl my-4">Hey there, I'm Lee!</div>
             <div className="text-2xl sm:text-5xl mt-2">I like playing minecraft</div>
@@ -88,7 +95,33 @@ function App() {
               contact me
             </a>
           </div>
+
+          
         </div>
+        
+        <div>
+        <div className="font-bold flex justify-center items-center mb-4">Languages that I use:</div>
+        <div className="flex w-full overflow-hidden border-y border-slate-200/70 py-6 dark:border-slate-700/70">
+            <ul className="flex shrink-0 animate-infinite-scroll items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:h-12 [&_img]:w-12 [&_img]:object-contain">
+              <li><img src={cppLogo} alt="C++" /></li>
+              <li><img src={csharpLogo} alt="C#" /></li>
+              <li><img src={pythonLogo} alt="Python" /></li>
+              <li><img src={html5Logo} alt="HTML5" /></li>
+              <li><img src={kotlinLogo} alt="Kotlin" /></li>
+              <li><img src={dockerLogo} alt="Docker" /></li>
+              <li><img src={powershellLogo} alt="PowerShell" /></li>
+            </ul>
+            <ul aria-hidden="true" className="flex shrink-0 animate-infinite-scroll items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:h-12 [&_img]:w-12 [&_img]:object-contain">
+              <li><img src={cppLogo} alt="" /></li>
+              <li><img src={csharpLogo} alt="" /></li>
+              <li><img src={pythonLogo} alt="" /></li>
+              <li><img src={html5Logo} alt="" /></li>
+              <li><img src={kotlinLogo} alt="" /></li>
+              <li><img src={dockerLogo} alt="" /></li>
+              <li><img src={powershellLogo} alt="" /></li>
+            </ul>
+          </div>
+          </div>
 
         {/* Projects */}
         <div className="py-20 px-6">
@@ -119,7 +152,7 @@ function App() {
         
         {/* Contact Me */}
 
-          <div id="contact" className="py-20 px-6 sm:px-[10vh]">
+          <div id="contact" className="py-20 px-[1vh] sm:px-[10vh]">
             <h2 className="text-3xl font-bold text-center mb-10">contact me</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2">
               <div className="mr-4">  
