@@ -76,7 +76,7 @@ function App() {
       </div>
 
         {/* Hero */}
-        <div className="flex items-center justify-center px-[10vh] min-h-[calc(100vh-200px)]">
+        <div className="flex items-center justify-center px-4 sm:px-[10vh] min-h-[calc(100vh-200px)]">
           <div className="flex max-w-full flex-col items-start gap-2 text-left">
             <div className="font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl my-4">Hey there, I'm Lee!</div>
             <div className="text-2xl sm:text-5xl mt-2">I like playing minecraft</div>
