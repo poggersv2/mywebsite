@@ -34,7 +34,7 @@ function App() {
       <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-white transition-colors duration-300">
 
         {/* Navbar */}
-        <div className="sticky top-0 z-50 pt-[2vh] px-[1vh] sm:px-[10vh]">
+        <div className="sticky top-0 z-50 pt-[2vh]">
         <div className="mx-4 flex items-center justify-between rounded-full border border-slate-200/70 bg-white/70 px-8 py-5 text-2xl backdrop-blur-md transition-colors duration-300 dark:border-slate-700/70 dark:bg-slate-900/70">
           <div className="font-bold transition-opacity duration-300 hover:opacity-70 cursor-pointer"><a href="#about">lee.dev</a></div>
 
@@ -101,7 +101,7 @@ function App() {
         
         <div>
         <div className="font-bold flex justify-center items-center mb-4">Languages that I use:</div>
-        <div className="flex w-full overflow-hidden border-y border-slate-200/70 py-6 dark:border-slate-700/70">
+        <div className="flex w-full overflow-hidden border-y border-slate-200/70 py-6 dark:border-slate-700/70 [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
             <ul className="flex shrink-0 animate-infinite-scroll items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:h-12 [&_img]:w-12 [&_img]:object-contain">
               <li><img src={cppLogo} alt="C++" /></li>
               <li><img src={csharpLogo} alt="C#" /></li>
@@ -124,8 +124,8 @@ function App() {
           </div>
 
         {/* Projects */}
-        <div className="py-20 px-6">
-          <h2 id="projects" className="text-3xl font-bold text-center mb-10">Projects</h2>
+        <div id="projects" className="py-20 px-6 ">
+          <h2 className="text-3xl font-bold text-center mb-10">Projects</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full px-[1vh] sm:px-[10vh]">
               
               <div className="border border-slate-200 dark:border-slate-700 rounded-2xl p-6 hover:scale-105 transition-all duration-200 hover:shadow-lg">
