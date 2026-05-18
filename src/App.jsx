@@ -7,6 +7,9 @@ import html5Logo from "./assets/html5_logo.svg";
 import kotlinLogo from "./assets/kotlin_logo.svg";
 import powershellLogo from "./assets/powershell_logo.svg";
 import pythonLogo from "./assets/python_logo.svg";
+import instagramLogo from "./assets/instagram_logo.svg";
+import redditLogo from "./assets/reddit_logo.svg";
+import whatsappLogo from "./assets/whatsapp_logo.svg";
 
 const MoonIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" className="fill-slate-900 dark:fill-white transition-colors duration-300">
@@ -59,7 +62,7 @@ function App() {
 
         {/* Navbar */}
         <div className="sticky top-0 z-50 pt-4">
-        <div className="mx-4 flex items-center justify-between rounded-full border border-slate-200/70 bg-white/70 px-8 py-5 text-xl backdrop-blur-md transition-colors duration-300 dark:border-slate-700/70 dark:bg-slate-900/70">
+        <div className="mx-4 px-8 py-5 flex items-center justify-between rounded-full border border-slate-200/70 bg-white/70  text-xl backdrop-blur-md transition-colors duration-300 dark:border-slate-700/70 dark:bg-slate-900/70">
           <div className="font-bold transition-opacity duration-300 hover:opacity-70 cursor-pointer"><a href="#about">lee.dev</a></div>
 
           {/* Desktop Nav */}
@@ -97,13 +100,14 @@ function App() {
 
         {/* Mobile Dropdown */}
         <div
-          className={`absolute top-full left-0 right-0 z-50 bg-white dark:bg-slate-900 flex flex-col items-end gap-5 px-6 sm:hidden border-slate-200 dark:border-slate-700 overflow-hidden transition-all duration-300 ease-in-out ${
-            open ? "max-h-60 py-6 border-b opacity-100" : "max-h-0 py-0 opacity-0"
+          className={`absolute top-full m-[2vh] border border-slate-200/70 left-0 right-0 z-50 px-8 rounded-4xl flex flex-col items-end gap-5 sm:hidden dark:border-slate-700 overflow-hidden transition-all duration-300 ease-in-out ${
+            open ? "max-h-60 py-6 border-b backdrop-blur-md opacity-100" : "max-h-0 py-0 px-0 opacity-0 pointer-events-none"
           }`}
         >
-          <a href="#about" className="hover:opacity-70 transition-opacity duration-200">about me</a>
-          <a href="#projects" className="hover:opacity-70 transition-opacity duration-200">projects</a>
-          <a href="#contact" className="hover:opacity-70 transition-opacity duration-200">contact</a>
+          <a href="#about" onClick={() => setOpen(false)} className="hover:opacity-70 transition-opacity duration-200">about me</a>
+          <a href="#projects" onClick={() => setOpen(false)} className="hover:opacity-70 transition-opacity duration-200">projects</a>
+          <a href="#contact" onClick={() => setOpen(false)} className="hover:opacity-70 transition-opacity duration-200">contact</a>
+          <a href="#guestbook" onClick={() => setOpen(false)} className="hover:opacity-70 transition-opacity duration-200">guestbook</a>
         </div>
       </div>
 
@@ -238,7 +242,35 @@ function App() {
       </div>
       </div>
      
-      
+    <footer className="mt-20 px-8 py-6 bg-slate-900 text-white border-t rounded-t-2xl dark:bg-white dark:text-slate-900">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+        
+        {/* Social icons */}
+        <div className="flex items-center gap-4">
+          <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0" className="hover:opacity-70 hover:scale-110 transition-all duration-200">
+            <img src={whatsappLogo} alt="WhatsApp" className="h-8 w-8 object-contain" />
+          </a>
+          <a href="https://www.instagram.com/lee.lin_w/" className="hover:opacity-70 hover:scale-110 transition-all duration-200">
+            <img src={instagramLogo} alt="Instagram" className="h-8 w-8 object-contain" />
+          </a>
+          <a href="https://www.reddit.com/user/random-kiddo-1/" className="hover:opacity-70 hover:scale-110 transition-all duration-200">
+            <img src={redditLogo} alt="Reddit" className="h-8 w-8 object-contain" />
+          </a>
+        </div>
+
+        {/* Copyright */}
+        <div className="text-center sm:text-right">
+          <div className="font-bold">© 2069 Sigma Tripple T, Inc. No Rights Reserved.</div>
+          <div className="text-sm">
+            no really, use whatever you want from my website... it's half broken anyways
+          </div>
+          <div className="text-xs">
+            find the easter egg!
+          </div>
+        </div>
+
+      </div>
+    </footer>
       </main>
       
   );
