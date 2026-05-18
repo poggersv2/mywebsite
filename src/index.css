@@ -10,6 +10,7 @@
   --color-foreground: #f8fafc;
   --color-dot: #e2e8f0;
   --animate-infinite-scroll: infinite-scroll 25s linear infinite;
+  --animate-type-title: type-title 1.7s steps(20, end), caret-blink 0.9s step-end infinite;
 }
 
 @keyframes infinite-scroll {
@@ -19,6 +20,22 @@
 
   to {
     transform: translateX(-100%);
+  }
+}
+
+@keyframes type-title {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes caret-blink {
+  50% {
+    border-color: transparent;
   }
 }
 
@@ -36,9 +53,6 @@
 
   body {
     min-height: 100vh;
-    background-color: white;
-    background-image: radial-gradient(circle, var(--color-dot) 1px, transparent 1px);
-    background-size: 24px 24px;
     overscroll-behavior: none;
   }
 
@@ -49,4 +63,6 @@
   html::-webkit-scrollbar {
     display: none;
   }
+
+  
 }

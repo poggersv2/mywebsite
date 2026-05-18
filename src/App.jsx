@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Giscus from "@giscus/react";
 import csharpLogo from "./assets/csharp_logo.svg";
 import cppLogo from "./assets/c++_logo.svg";
 import dockerLogo from "./assets/docker_logo.svg";
@@ -19,6 +20,29 @@ const SunIcon = () => (
   </svg>
 );
 
+function Comments({theme}) {
+  return (
+    <div className="py-20 px-6 max-w-4xl mx-auto">
+      <h2 className="text-3xl font-bold text-center mb-10 text-black dark:text-white">guestbook</h2>
+      <Giscus
+        repo="poggersv2/mywebsite"
+        repoId="R_kgDOSfv61w"
+        category="General"
+        categoryId="DIC_kwDOSfv6184C9SHy"
+        mapping="url"
+        strict="0"
+        reactionsEnabled="1"
+        emitMetadata="0"
+        inputPosition="bottom"
+        theme={theme === "dark" ? "dark" : "light"}
+        lang="en"
+        crossOrigin="anonymous"
+      />
+    </div>
+  );
+}
+
+
 function App() {
   const [theme, setTheme] = useState("light");
   const [open, setOpen] = useState(false);
@@ -34,8 +58,8 @@ function App() {
       <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-white transition-colors duration-300">
 
         {/* Navbar */}
-        <div className="sticky top-0 z-50 pt-[2vh]">
-        <div className="mx-4 flex items-center justify-between rounded-full border border-slate-200/70 bg-white/70 px-8 py-5 text-2xl backdrop-blur-md transition-colors duration-300 dark:border-slate-700/70 dark:bg-slate-900/70">
+        <div className="sticky top-0 z-50 pt-4">
+        <div className="mx-4 flex items-center justify-between rounded-full border border-slate-200/70 bg-white/70 px-8 py-5 text-xl backdrop-blur-md transition-colors duration-300 dark:border-slate-700/70 dark:bg-slate-900/70">
           <div className="font-bold transition-opacity duration-300 hover:opacity-70 cursor-pointer"><a href="#about">lee.dev</a></div>
 
           {/* Desktop Nav */}
@@ -43,6 +67,7 @@ function App() {
             <a href="#about" className="hover:opacity-70 transition-opacity duration-200">about me</a>
             <a href="#projects" className="hover:opacity-70 transition-opacity duration-200">projects</a>
             <a href="#contact" className="hover:opacity-70 transition-opacity duration-200">contact</a>
+            <a href="#guestbook" className="hover:opacity-70 transition-opacity duration-200">guestbook</a>
             <button onClick={toggleTheme} className="cursor-pointer hover:opacity-70 transition-opacity duration-200">
               {theme === "light" ? <MoonIcon /> : <SunIcon />}
             </button>
@@ -85,14 +110,14 @@ function App() {
         {/* Hero */}
         <div className="flex items-center justify-center px-[1vh] sm:px-[10vh] min-h-[calc(100vh-300px)]">
           <div className="flex max-w-full flex-col items-start gap-2 text-left">
-            <div className="font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl my-4">Hey there, I'm Lee!</div>
-            <div className="text-2xl sm:text-5xl mt-2">I like playing minecraft</div>
+            <div className="font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl my-4">Hey there, <span className="text-blue-900 dark:text-white">I'm Lee!</span></div>
+            <div className="text-2xl sm:text-5xl mt-2">I like playing Minecraft</div>
             <div className="">Oh yeah, I also program in Python, C++ and do web dev stuff</div>
             <a
               href="#contact"
-              className="mt-4 inline-flex rounded-lg bg-slate-900 px-6 py-3 font-bold text-white transition-opacity hover:opacity-80 dark:bg-white dark:text-slate-900"
+              className="mt-4 inline-flex rounded-lg border border-transparent  bg-slate-900 px-6 py-3 font-bold text-white transition-opacity hover:opacity-80 dark:bg-white dark:text-slate-900"
             >
-              contact me
+              Contact Me
             </a>
           </div>
 
@@ -112,20 +137,20 @@ function App() {
               <li><img src={powershellLogo} alt="PowerShell" /></li>
             </ul>
             <ul aria-hidden="true" className="flex shrink-0 animate-infinite-scroll items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:h-12 [&_img]:w-12 [&_img]:object-contain">
-              <li><img src={cppLogo} alt="" /></li>
-              <li><img src={csharpLogo} alt="" /></li>
-              <li><img src={pythonLogo} alt="" /></li>
-              <li><img src={html5Logo} alt="" /></li>
-              <li><img src={kotlinLogo} alt="" /></li>
-              <li><img src={dockerLogo} alt="" /></li>
-              <li><img src={powershellLogo} alt="" /></li>
+              <li><img src={cppLogo} alt="C++" /></li>
+              <li><img src={csharpLogo} alt="C#" /></li>
+              <li><img src={pythonLogo} alt="Python" /></li>
+              <li><img src={html5Logo} alt="HTML5" /></li>
+              <li><img src={kotlinLogo} alt="Kotlin" /></li>
+              <li><img src={dockerLogo} alt="Docker" /></li>
+              <li><img src={powershellLogo} alt="PowerShell" /></li>
             </ul>
           </div>
           </div>
 
         {/* Projects */}
         <div id="projects" className="py-20 px-6 ">
-          <h2 className="text-3xl font-bold text-center mb-10">Projects</h2>
+          <h2 className="text-3xl font-bold text-center mb-10">projects</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full px-[1vh] sm:px-[10vh]">
               
               <div className="border border-slate-200 dark:border-slate-700 rounded-2xl p-6 hover:scale-105 transition-all duration-200 hover:shadow-lg">
@@ -208,9 +233,16 @@ function App() {
           </div>
 
         </div>
+         <div id="guestbook"> 
+        <Comments theme={theme}/>
       </div>
+      </div>
+     
+      
       </main>
+      
   );
 }
 
 export default App;
+
