@@ -10,8 +10,7 @@ import pythonLogo from "./assets/python_logo.svg";
 import instagramLogo from "./assets/instagram_logo.svg";
 import redditLogo from "./assets/reddit_logo.svg";
 import whatsappLogo from "./assets/whatsapp_logo.svg";
-// import downArrow from "./assets/down_arrow.svg";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from '@vercel/analytics/react';
 
 const MoonIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" className="fill-slate-900 dark:fill-white transition-colors duration-300">
@@ -275,6 +274,7 @@ function App() {
 
       </div>
     </footer>
+    <Analytics />
       </main>
       
   );
