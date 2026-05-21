@@ -1,6 +1,20 @@
 # Hackclub Horizons 
 This is the project I'm building for Horizons!
 
+## Purpose
+My personal portfolio website to showcase my skills and to attract future employers
+
+## Acknowledgements
+- [Claude AI](https://claude.ai/)
+- Less than 10% of my website is AI generated.
+
+
+
+
+
+
+
+
 
 # React + Vite
 
