@@ -11,6 +11,8 @@ import instagramLogo from "./assets/instagram_logo.svg";
 import redditLogo from "./assets/reddit_logo.svg";
 import whatsappLogo from "./assets/whatsapp_logo.svg";
 import { Analytics } from '@vercel/analytics/react';
+import { useHypixel } from "./hooks/useHypixel";
+import heroImage from "./assets/Hero.webp"
 
 const MoonIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" className="fill-slate-900 dark:fill-white transition-colors duration-300">
@@ -26,8 +28,7 @@ const SunIcon = () => (
 
 function Comments({theme}) {
   return (
-    <div className="py-20 px-6 max-w-4xl mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-10 text-black dark:text-white">guestbook</h2>
+    <div className="w-full">
       <Giscus
         repo="poggersv2/mywebsite"
         repoId="R_kgDOSfv61w"
@@ -46,7 +47,6 @@ function Comments({theme}) {
   );
 }
 
-
 function App() {
   const [theme, setTheme] = useState("light");
   const [open, setOpen] = useState(false);
@@ -57,149 +57,198 @@ function App() {
     document.documentElement.classList.toggle("dark", newTheme === "dark");
   };
 
+  const { stats, loading } = useHypixel();
+
+  const bw = stats?.stats?.Bedwars ?? {};
+  const finalKills = bw.final_kills_bedwars ?? 0;
+
   return (
-    <main id="about">
-      <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-white transition-colors duration-300">
-
+    <main id="about" className="min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-white transition-colors duration-300 flex flex-col justify-between">
+      <div>
         {/* Navbar */}
-        <div className="sticky top-0 z-50 pt-4">
-        <div className="mx-4 px-8 py-5 flex items-center justify-between rounded-full border border-slate-200/70 bg-white/70  text-xl backdrop-blur-md transition-colors duration-300 dark:border-slate-700/70 dark:bg-slate-900/70">
-          <div className="font-bold transition-opacity duration-300 hover:opacity-70 cursor-pointer"><a href="#about">lee.dev</a></div>
+        <div className="sticky top-0 z-50 pt-4 w-full font-sans">
+          <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16">
+            <div className="px-8 py-4 flex items-center justify-between rounded-full border border-slate-200/70 bg-white/70 text-lg backdrop-blur-md transition-colors duration-300 dark:border-slate-700/70 dark:bg-slate-900/70">
+              <div className="font-bold tracking-tight transition-opacity duration-300 hover:opacity-70 cursor-pointer">
+                <a href="#about">lee.dev</a>
+              </div>
 
-          {/* Desktop Nav */}
-          <div className="hidden sm:flex items-center gap-6 ">
-            <a href="#about" className="hover:opacity-70 transition-opacity duration-200">about me</a>
-            <a href="#projects" className="hover:opacity-70 transition-opacity duration-200">projects</a>
-            <a href="#contact" className="hover:opacity-70 transition-opacity duration-200">contact</a>
-            <a href="#guestbook" className="hover:opacity-70 transition-opacity duration-200">guestbook</a>
-            <button onClick={toggleTheme} className="cursor-pointer hover:opacity-70 transition-opacity duration-200">
-              {theme === "light" ? <MoonIcon /> : <SunIcon />}
-            </button>
-          </div>
+              {/* Desktop Nav */}
+              <div className="hidden sm:flex items-center gap-6 text-sm font-medium">
+                <a href="#about" className="hover:opacity-70 transition-opacity duration-200">about me</a>
+                <a href="#projects" className="hover:opacity-70 transition-opacity duration-200">projects</a>
+                <a href="#contact" className="hover:opacity-70 transition-opacity duration-200">contact</a>
+                <a href="#guestbook" className="hover:opacity-70 transition-opacity duration-200">guestbook</a>
+                <button onClick={toggleTheme} className="cursor-pointer hover:opacity-70 transition-opacity duration-200 flex items-center">
+                  {theme === "light" ? <MoonIcon /> : <SunIcon />}
+                </button>
+              </div>
 
-          {/* Mobile theme and menu*/}
-          <div className="flex items-center justify-end gap-3 sm:hidden">
-            <button onClick={toggleTheme} className="cursor-pointer hover:opacity-70 transition-opacity duration-200">
-              {theme === "light" ? <MoonIcon /> : <SunIcon />}
-            </button>
-            <button
-              onClick={() => setOpen(!open)}
-              className="cursor-pointer hover:opacity-70 transition-all duration-200"
+              {/* Mobile theme and menu*/}
+              <div className="flex items-center justify-end gap-4 sm:hidden">
+                <button onClick={toggleTheme} className="cursor-pointer hover:opacity-70 transition-opacity duration-200 flex items-center">
+                  {theme === "light" ? <MoonIcon /> : <SunIcon />}
+                </button>
+                <button
+                  onClick={() => setOpen(!open)}
+                  className="cursor-pointer hover:opacity-70 transition-all duration-200 flex items-center"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -960 960 960"
+                    width="24px"
+                    className={`fill-slate-900 dark:fill-white transition-transform duration-300 ${open ? "rotate-180" : "rotate-0"}`}
+                  >
+                    <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Mobile Dropdown */}
+            <div
+              className={`absolute left-6 right-6 sm:left-12 sm:right-12 mt-2 border border-slate-200/70 z-50 px-8 rounded-3xl flex flex-col items-end gap-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md overflow-hidden transition-all duration-300 ease-in-out ${
+                open ? "max-h-60 py-6 opacity-100 shadow-lg dark:border-slate-700" : "max-h-0 py-0 opacity-0 pointer-events-none border-none"
+              }`}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                className={`fill-slate-900 dark:fill-white transition-transform duration-300 ${open ? "rotate-180" : "rotate-0"}`}
-              >
-                <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
-              </svg>
-            </button>
+              <a href="#about" onClick={() => setOpen(false)} className="hover:opacity-70 transition-opacity duration-200 text-sm font-medium">about me</a>
+              <a href="#projects" onClick={() => setOpen(false)} className="hover:opacity-70 transition-opacity duration-200 text-sm font-medium">projects</a>
+              <a href="#contact" onClick={() => setOpen(false)} className="hover:opacity-70 transition-opacity duration-200 text-sm font-medium">contact</a>
+              <a href="#guestbook" onClick={() => setOpen(false)} className="hover:opacity-70 transition-opacity duration-200 text-sm font-medium">guestbook</a>
+            </div>
           </div>
         </div>
-
-        {/* Mobile Dropdown */}
-        <div
-          className={`absolute top-full m-[2vh] border border-slate-200/70 left-0 right-0 z-50 px-8 rounded-4xl flex flex-col items-end gap-5 sm:hidden dark:border-slate-700 overflow-hidden transition-all duration-300 ease-in-out ${
-            open ? "max-h-60 py-6 border-b backdrop-blur-md opacity-100" : "max-h-0 py-0 px-0 opacity-0 pointer-events-none"
-          }`}
-        >
-          <a href="#about" onClick={() => setOpen(false)} className="hover:opacity-70 transition-opacity duration-200">about me</a>
-          <a href="#projects" onClick={() => setOpen(false)} className="hover:opacity-70 transition-opacity duration-200">projects</a>
-          <a href="#contact" onClick={() => setOpen(false)} className="hover:opacity-70 transition-opacity duration-200">contact</a>
-          <a href="#guestbook" onClick={() => setOpen(false)} className="hover:opacity-70 transition-opacity duration-200">guestbook</a>
-        </div>
-      </div>
 
         {/* Hero */}
-        <div className="flex items-center justify-center px-[1vh] sm:px-[10vh] min-h-[calc(100vh-300px)]">
-          <div className="flex max-w-full flex-col items-start gap-2 text-left">
-            <div className="font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl my-4">Hey there, <span className="text-blue-900 dark:text-white">I'm Lee!</span></div>
-            <div className="text-2xl sm:text-5xl mt-2">I like playing Minecraft</div>
-            <div className="">Oh yeah, I also program in Python, C++ and do web dev stuff</div>
-            <a
-              href="#contact"
-              className="mt-4 inline-flex rounded-lg border border-transparent  bg-slate-900 px-6 py-3 font-bold text-white transition-opacity hover:opacity-80 dark:bg-white dark:text-slate-900"
-            >
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-12 px-6 sm:px-12 lg:px-16 max-w-7xl mx-auto min-h-[calc(100vh-120px)] font-sans"> 
+          {/* Left half */}
+          <div className="flex flex-col items-start gap-4 py-8">
+            <h1 className="font-bold text-6xl sm:text-7xl lg:text-8xl font-serif-heading leading-none">
+              Hey there, <span className="text-blue-900 dark:text-blue-400">I'm Lee!</span>
+            </h1>
+            <div className="text-2xl sm:text-3xl text-slate-700 dark:text-slate-300">I like playing Minecraft</div>
+            <p className="text-slate-500 dark:text-slate-400 font-medium max-w-md">Oh yeah, I also program in Python, C++ and do web dev stuff.</p>
+            <a href="#contact"
+              className="mt-2 inline-flex rounded-xl bg-slate-900 px-6 py-3 font-bold text-white transition-all hover:opacity-80 dark:bg-white dark:text-slate-900 hover:scale-[1.02]">
               Contact Me
             </a>
           </div>
 
-          
-
-          
+          {/* Right half */}
+          <div className="relative grainy rounded-3xl overflow-hidden shadow-xl border border-slate-100 dark:border-slate-800">
+            <img
+              src={heroImage}
+              alt="me playing mc"
+              className="w-full h-full object-cover rounded-3xl"
+            />
+          </div>
         </div>
-        
-        <div>
-        <div className="font-bold flex justify-center items-center mb-4">Languages that I use:</div>
-        <div className="flex w-full overflow-hidden border-y border-slate-200/70 py-6 dark:border-slate-700/70 [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
-            <ul className="flex shrink-0 animate-infinite-scroll items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:h-12 [&_img]:w-12 [&_img]:object-contain">
-              <li><img src={cppLogo} alt="C++" /></li>
-              <li><img src={csharpLogo} alt="C#" /></li>
-              <li><img src={pythonLogo} alt="Python" /></li>
-              <li><img src={html5Logo} alt="HTML5" /></li>
-              <li><img src={kotlinLogo} alt="Kotlin" /></li>
-              <li><img src={dockerLogo} alt="Docker" /></li>
-              <li><img src={powershellLogo} alt="PowerShell" /></li>
-            </ul>
-            <ul aria-hidden="true" className="flex shrink-0 animate-infinite-scroll items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:h-12 [&_img]:w-12 [&_img]:object-contain">
-              <li><img src={cppLogo} alt="C++" /></li>
-              <li><img src={csharpLogo} alt="C#" /></li>
-              <li><img src={pythonLogo} alt="Python" /></li>
-              <li><img src={html5Logo} alt="HTML5" /></li>
-              <li><img src={kotlinLogo} alt="Kotlin" /></li>
-              <li><img src={dockerLogo} alt="Docker" /></li>
-              <li><img src={powershellLogo} alt="PowerShell" /></li>
-            </ul>
+
+        {/* Languages / Skills Section */}
+        <div className="py-12 max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 font-sans">
+          <div className="bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/40 rounded-3xl py-8 overflow-hidden">
+            <div className="text-sm font-semibold tracking-wider text-slate-400 dark:text-slate-500 uppercase text-center mb-6">
+              Languages and technologies I use
+            </div>
+
+            {/* Marquee Wrapper Container */}
+            <div className="relative flex w-full overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
+              {/* Track 1 */}
+              <ul className="flex min-w-full shrink-0 animate-infinite-scroll items-center justify-around gap-12 [&_img]:h-10 [&_img]:w-10 sm:[&_img]:h-12 sm:[&_img]:w-12 [&_img]:object-contain">
+                <li><img src={cppLogo} alt="C++" /></li>
+                <li><img src={csharpLogo} alt="C#" /></li>
+                <li><img src={pythonLogo} alt="Python" /></li>
+                <li><img src={html5Logo} alt="HTML5" /></li>
+                <li><img src={kotlinLogo} alt="Kotlin" /></li>
+                <li><img src={dockerLogo} alt="Docker" /></li>
+                <li><img src={powershellLogo} alt="PowerShell" /></li>
+              </ul>
+
+              {/* Track 2 */}
+              <ul aria-hidden="true" className="flex min-w-full shrink-0 animate-infinite-scroll items-center justify-around gap-12 [&_img]:h-10 [&_img]:w-10 sm:[&_img]:h-12 sm:[&_img]:w-12 [&_img]:object-contain">
+                <li><img src={cppLogo} alt="C++" /></li>
+                <li><img src={csharpLogo} alt="C#" /></li>
+                <li><img src={pythonLogo} alt="Python" /></li>
+                <li><img src={html5Logo} alt="HTML5" /></li>
+                <li><img src={kotlinLogo} alt="Kotlin" /></li>
+                <li><img src={dockerLogo} alt="Docker" /></li>
+                <li><img src={powershellLogo} alt="PowerShell" /></li>
+              </ul>
+            </div>
           </div>
+        </div>
+
+        {/* Projects Section */}
+        <div id="projects" className="py-24 max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 font-sans">
+          <div className="flex flex-col items-center mb-16 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold  font-serif-heading mb-2">projects</h2>
+            <div className="h-1 w-12 bg-blue-900 dark:bg-blue-500 rounded-full"></div>
           </div>
 
-        {/* Projects */}
-        <div id="projects" className="py-20 px-6 ">
-          <h2 className="text-3xl font-bold text-center mb-10">projects</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full px-[1vh] sm:px-[10vh]">
-              
-              <div className="border border-slate-200 dark:border-slate-700 rounded-2xl p-6 hover:scale-105 transition-all duration-200 hover:shadow-lg">
-                <h3 className="text-xl font-bold mb-2">work in progress</h3>
-                <p className="text-slate-500 dark:text-slate-400">fun fact: im good at bedwars</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {/* Card 1 */}
+            <div className="flex flex-col justify-between border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 bg-slate-50/30 dark:bg-slate-900/30 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-slate-300 dark:hover:border-slate-700">
+              <div>
+                <h3 className="text-lg font-bold mb-3 tracking-tight">work in progress</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">fun fact: im good at bedwars</p>
               </div>
+              <div className="mt-6 text-xs font-semibold tracking-wider text-blue-900 dark:text-blue-400 uppercase">Active</div>
+            </div>
 
-              <div className="border border-slate-200 dark:border-slate-700 rounded-2xl p-6 hover:scale-105 transition-all duration-200 hover:shadow-lg">
-                <h3 className="text-xl font-bold mb-2">not done yet...</h3>
-                <p className="text-slate-500 dark:text-slate-400">67 67 67 67 67 67 67 67</p>
+            {/* Card 2 */}
+            <div className="flex flex-col justify-between border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 bg-slate-50/30 dark:bg-slate-900/30 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-slate-300 dark:hover:border-slate-700">
+              <div>
+                <h3 className="text-lg font-bold mb-3 tracking-tight">not done yet...</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-mono">67 67 67 67 67 67 67 67</p>
               </div>
+              <div className="mt-6 text-xs font-semibold tracking-wider text-slate-400 dark:text-slate-500 uppercase">Pending</div>
+            </div>
 
-              <div className="border border-slate-200 dark:border-slate-700 rounded-2xl p-6 hover:scale-105 transition-all duration-200 hover:shadow-lg">
-                <h3 className="text-xl font-bold mb-2">who dosn't love lorem ipsum</h3>
-                <p className="text-slate-500 dark:text-slate-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque fermentum eu dui a eleifend. Vestibulum feugiat tellus vitae suscipit lacinia. Sed sit amet tincidunt tortor, eu lacinia diam.</p>
+            {/* Card 3 */}
+            <div className="flex flex-col justify-between border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 bg-slate-50/30 dark:bg-slate-900/30 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-slate-300 dark:hover:border-slate-700">
+              <div>
+                <h3 className="text-lg font-bold mb-3 tracking-tight">who doesn't love lorem ipsum</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-3">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque fermentum eu dui a eleifend. Vestibulum feugiat tellus vitae suscipit lacinia. Sed sit amet tincidunt tortor, eu lacinia diam.
+                </p>
               </div>
+              <div className="mt-6 text-xs font-semibold tracking-wider text-blue-900 dark:text-blue-400 uppercase">Completed</div>
+            </div>
 
-              <div className="border border-slate-200 dark:border-slate-700 rounded-2xl p-6 hover:scale-105 transition-all duration-200 hover:shadow-lg">
-                <h3 className="text-xl font-bold mb-2">tbc</h3>
-                <p className="text-slate-500 dark:text-slate-400">what do you call an american bee?<br /> A USB <br /> AHAHHAHAHA GET IT GET IT</p>
+            {/* Card 4 */}
+            <div className="flex flex-col justify-between border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 bg-slate-50/30 dark:bg-slate-900/30 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-slate-300 dark:hover:border-slate-700">
+              <div>
+                <h3 className="text-lg font-bold mb-3 tracking-tight">tbc</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed italic">what do you call an american bee?<br />A USB<br />AHAHAH Get it?</p>
               </div>
-
+              <div className="mt-6 text-xs font-semibold tracking-wider text-slate-400 dark:text-slate-500 uppercase">Concepts</div>
+            </div>
           </div>
-        
-        {/* Contact Me */}
+        </div>
 
-          <div id="contact" className="py-20 px-[1vh] sm:px-[10vh]">
-            <h2 className="text-3xl font-bold text-center mb-10">contact me</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2">
-              <div className="mr-4">  
-                <div className="text-4xl font-bold">Yes, I do take donations,</div>
-                <div className="text-xl font-bold">
-                  Feel free to hit me up any time of the day (except for when I'm taking a 😴)
-                </div>
-                <div>Use the form to the right (or bottom if you're on mobile) or add me on other social medias (IF you can find me)</div>
-                <div>
-                  I'm very very very bored, and I promise I won't bite as long as you're nice =)
-                </div>
+        {/* Contact Me Section */}
+        <div id="contact" className="py-24 max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 font-sans">
+          <div className="flex flex-col items-center mb-16 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold font-serif-heading mb-2">contact me</h2>
+            <div className="h-1 w-12 bg-blue-900 dark:bg-blue-500 rounded-full"></div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+            <div className="flex flex-col gap-4">  
+              <h3 className="text-3xl font-bold tracking-tight text-blue-900 dark:text-blue-400">Yes, I do take donations,</h3>
+              <p className="text-lg font-semibold leading-snug">
+                Feel free to hit me up any time of the day (except for when I'm taking a 😴)
+              </p>
+              <p className="text-slate-500 dark:text-slate-400 leading-relaxed">
+                Use the form to the right (or bottom on mobile) or add me on other social medias (IF you can find me).
+              </p>
+              <p className="text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
+                I'm very very very bored, and I promise I won't bite as long as you're nice =)
+              </p>
             </div>
            
-            
-            <form className="flex w-full flex-col gap-4 mt-10 sm:mt-0"
+            <form className="flex w-full flex-col gap-4 bg-slate-50/50 dark:bg-slate-800/20 border border-slate-200/60 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8"
                   method="POST"
                   action="https://formspree.io/f/mykvgdoy">
               <input
@@ -207,7 +256,7 @@ function App() {
                 name="name"
                 autoComplete="name"
                 placeholder="Your name"
-                className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 bg-white dark:bg-slate-900 outline-none focus:ring-2 focus:ring-slate-400"
+                className="w-full border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 bg-white dark:bg-slate-900 outline-none focus:ring-2 focus:ring-blue-900 dark:focus:ring-blue-500 transition-all duration-200"
                 required
               />
 
@@ -216,7 +265,7 @@ function App() {
                 name="email"
                 autoComplete="email"
                 placeholder="Your email"
-                className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 bg-white dark:bg-slate-900 outline-none focus:ring-2 focus:ring-slate-400"
+                className="w-full border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 bg-white dark:bg-slate-900 outline-none focus:ring-2 focus:ring-blue-900 dark:focus:ring-blue-500 transition-all duration-200"
                 required
               />
 
@@ -225,60 +274,64 @@ function App() {
                 autoComplete="off"
                 placeholder="Your message"
                 rows="5"
-                className="w-full border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 bg-white dark:bg-slate-900 outline-none focus:ring-2 focus:ring-slate-400 resize-none"
+                className="w-full border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 bg-white dark:bg-slate-900 outline-none focus:ring-2 focus:ring-blue-900 dark:focus:ring-blue-500 transition-all duration-200 resize-none"
                 required
               />
 
               <button
                 type="submit"
-                className="w-full cursor-pointer rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-3 font-bold hover:opacity-80 transition-opacity"
+                className="w-full cursor-pointer rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-3 font-bold hover:opacity-90 transition-opacity shadow-sm"
               >
                 Send message
               </button>
             </form>
           </div>
-          </div>
-
         </div>
-         <div id="guestbook"> 
-        <Comments theme={theme}/>
-      </div>
+
+        {/* Guestbook Section */}
+        <div id="guestbook" className="py-24 max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 font-sans border-t border-slate-100 dark:border-slate-800/60"> 
+          <div className="flex flex-col items-center mb-16 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-2 font-serif-heading">guestbook</h2>
+            <div className="h-1 w-12 bg-blue-900 dark:bg-blue-500 rounded-full"></div>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <Comments theme={theme}/>
+          </div>
+        </div>
       </div>
      
-    <footer className="mt-20 px-8 py-6 bg-slate-900 text-white border-t rounded-t-2xl dark:bg-white dark:text-slate-900">
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-        
-        {/* Social icons */}
-        <div className="flex items-center gap-4">
-          <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0" className="hover:opacity-70 hover:scale-110 transition-all duration-200">
-            <img src={whatsappLogo} alt="WhatsApp" className="h-8 w-8 object-contain" />
-          </a>
-          <a href="https://www.instagram.com/lee.lin_w/" className="hover:opacity-70 hover:scale-110 transition-all duration-200">
-            <img src={instagramLogo} alt="Instagram" className="h-8 w-8 object-contain" />
-          </a>
-          <a href="https://www.reddit.com/user/random-kiddo-1/" className="hover:opacity-70 hover:scale-110 transition-all duration-200">
-            <img src={redditLogo} alt="Reddit" className="h-8 w-8 object-contain" />
-          </a>
-        </div>
-
-        {/* Copyright */}
-        <div className="text-center sm:text-right">
-          <div className="font-bold">© 2069 Sigma Tripple T, Inc. No Rights Reserved.</div>
-          <div className="text-sm">
-            no really, use whatever you want from my website... it's half broken anyways
+      {/* Footer */}
+      <footer className="w-full border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 font-sans mt-12">
+        <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 py-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+          {/* Social icons */}
+          <div className="flex items-center gap-5">
+            <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0" className="hover:opacity-70 hover:scale-110 transition-all duration-200 bg-white dark:bg-slate-900 p-2 rounded-xl border border-slate-200/60 dark:border-slate-800 shadow-sm flex items-center justify-center">
+              <img src={whatsappLogo} alt="WhatsApp" className="h-6 w-6 object-contain" />
+            </a>
+            <a href="https://www.instagram.com/lee.lin_w/" className="hover:opacity-70 hover:scale-110 transition-all duration-200 bg-white dark:bg-slate-900 p-2 rounded-xl border border-slate-200/60 dark:border-slate-800 shadow-sm flex items-center justify-center">
+              <img src={instagramLogo} alt="Instagram" className="h-6 w-6 object-contain" />
+            </a>
+            <a href="https://www.reddit.com/user/random-kiddo-1/" className="hover:opacity-70 hover:scale-110 transition-all duration-200 bg-white dark:bg-slate-900 p-2 rounded-xl border border-slate-200/60 dark:border-slate-800 shadow-sm flex items-center justify-center">
+              <img src={redditLogo} alt="Reddit" className="h-8 w-8 object-contain" />
+            </a>
           </div>
-          <div className="text-xs">
-            find the easter egg!
+
+          {/* Copyright & Info */}
+          <div className="text-center sm:text-right flex flex-col gap-1">
+            <div className="font-bold text-sm text-slate-800 dark:text-slate-200">© 2069 Sigma Tripple T, Inc. No Rights Reserved.</div>
+            <div className="text-xs text-slate-400 dark:text-slate-500">
+              no really, use whatever you want from my website... it's half broken anyways
+            </div>
+            <div className="text-[10px] tracking-wider font-semibold text-slate-300 dark:text-slate-600 uppercase mt-1">
+              find the easter egg! Bedwars Final Kills: {finalKills}
+            </div>
           </div>
         </div>
+      </footer>
 
-      </div>
-    </footer>
-    <Analytics />
-      </main>
-      
+      <Analytics />
+    </main>
   );
 }
 
 export default App;
-
