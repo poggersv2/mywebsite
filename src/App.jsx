@@ -238,7 +238,7 @@ function App() {
             {/* Left Sidebar: Context & Visual Directory */}
             <div className="flex flex-col gap-6 lg:col-span-5">  
               <div>
-                <h3 className="text-3xl font-bold tracking-tight text-blue-900 dark:text-blue-400 mb-2">Let's connect</h3>
+                <h3 className="text-3xl font-bold tracking-tight text-blue-900 dark:text-blue-400 mb-2">Yes, I do take donations</h3>
                 <p className="text-lg font-semibold leading-snug mb-3">
                   Feel free to hit me up any time of the day (except for when I'm taking a 😴)
                 </p>
