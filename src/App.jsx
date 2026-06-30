@@ -182,7 +182,7 @@ function App() {
         {/* Projects Section */}
         <div id="projects" className="py-24 max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 font-sans">
           <div className="flex flex-col items-center mb-16 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold  font-serif-heading mb-2">projects</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold font-serif-heading mb-2">projects</h2>
             <div className="h-1 w-12 bg-blue-900 dark:bg-blue-500 rounded-full"></div>
           </div>
 
@@ -234,21 +234,65 @@ function App() {
             <div className="h-1 w-12 bg-blue-900 dark:bg-blue-500 rounded-full"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-            <div className="flex flex-col gap-4">  
-              <h3 className="text-3xl font-bold tracking-tight text-blue-900 dark:text-blue-400">Yes, I do take donations,</h3>
-              <p className="text-lg font-semibold leading-snug">
-                Feel free to hit me up any time of the day (except for when I'm taking a 😴)
-              </p>
-              <p className="text-slate-500 dark:text-slate-400 leading-relaxed">
-                Use the form to the right (or bottom on mobile) or add me on other social medias (IF you can find me).
-              </p>
-              <p className="text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
-                I'm very very very bored, and I promise I won't bite as long as you're nice =)
-              </p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            {/* Left Sidebar: Context & Visual Directory */}
+            <div className="flex flex-col gap-6 lg:col-span-5">  
+              <div>
+                <h3 className="text-3xl font-bold tracking-tight text-blue-900 dark:text-blue-400 mb-2">Let's connect</h3>
+                <p className="text-lg font-semibold leading-snug mb-3">
+                  Feel free to hit me up any time of the day (except for when I'm taking a 😴)
+                </p>
+                <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">
+                  I'm very very very bored, and I promise I won't bite as long as you're nice =)
+                </p>
+              </div>
+
+              {/* Profiles Directory Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
+                <a href="https://github.com/poggersv2" target="_blank" rel="noreferrer" className="flex items-center gap-3 p-3 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 hover:border-slate-300 dark:hover:border-slate-700 hover:scale-[1.01] transition-all duration-200">
+                  <div className="p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-700 dark:text-slate-300"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">GitHub</span>
+                    <span className="text-sm font-bold tracking-tight">@poggersv2</span>
+                  </div>
+                </a>
+
+                <a href="https://www.instagram.com/lee.lin_w/" target="_blank" rel="noreferrer" className="flex items-center gap-3 p-3 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 hover:border-slate-300 dark:hover:border-slate-700 hover:scale-[1.01] transition-all duration-200">
+                  <div className="p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm flex items-center justify-center">
+                    <img src={instagramLogo} alt="Instagram" className="h-5 w-5 object-contain" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Instagram</span>
+                    <span className="text-sm font-bold tracking-tight">@lee.lin_w</span>
+                  </div>
+                </a>
+
+                <a href="https://www.reddit.com/user/random-kiddo-1/" target="_blank" rel="noreferrer" className="flex items-center gap-3 p-3 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 hover:border-slate-300 dark:hover:border-slate-700 hover:scale-[1.01] transition-all duration-200">
+                  <div className="p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm flex items-center justify-center">
+                    <img src={redditLogo} alt="Reddit" className="h-5 w-5 object-contain" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Reddit</span>
+                    <span className="text-sm font-bold tracking-tight">@random-kiddo-1</span>
+                  </div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0" target="_blank" rel="noreferrer" className="flex items-center gap-3 p-3 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 hover:border-slate-300 dark:hover:border-slate-700 hover:scale-[1.01] transition-all duration-200">
+                  <div className="p-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm flex items-center justify-center">
+                    <img src={whatsappLogo} alt="WhatsApp" className="h-5 w-5 object-contain" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">WhatsApp</span>
+                    <span className="text-sm font-bold tracking-tight">Message Me</span>
+                  </div>
+                </a>
+              </div>
             </div>
            
-            <form className="flex w-full flex-col gap-4 bg-slate-50/50 dark:bg-slate-800/20 border border-slate-200/60 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8"
+            {/* Right Sidebar: Form */}
+            <form className="flex w-full flex-col gap-4 bg-slate-50/50 dark:bg-slate-800/20 border border-slate-200/60 dark:border-slate-700/50 rounded-2xl p-6 sm:p-8 lg:col-span-7"
                   method="POST"
                   action="https://formspree.io/f/mykvgdoy">
               <input
