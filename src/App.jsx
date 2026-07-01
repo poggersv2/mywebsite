@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import Giscus from "@giscus/react";
 import csharpLogo from "./assets/csharp_logo.svg";
 import cppLogo from "./assets/c++_logo.svg";
@@ -26,7 +26,7 @@ const SunIcon = () => (
   </svg>
 );
 
-function Comments({theme}) {
+const Comments = memo(function Comments({theme}) {
   return (
     <div className="w-full">
       <Giscus
@@ -45,7 +45,7 @@ function Comments({theme}) {
       />
     </div>
   );
-}
+});
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -56,7 +56,7 @@ function App() {
     setTheme(newTheme);
     document.documentElement.classList.toggle("dark", newTheme === "dark");
   };
-
+  
   const { stats, loading } = useHypixel();
 
   const bw = stats?.stats?.Bedwars ?? {};
@@ -127,6 +127,7 @@ function App() {
             <h1 className="font-bold text-6xl sm:text-7xl lg:text-8xl font-serif-heading leading-none tracking-tight">
               Hey there, <span className="text-[#4A6B82] dark:text-[#93B4CC]">I'm Lee!</span>
             </h1>
+              
             <div className="text-2xl sm:text-3xl text-slate-600 dark:text-slate-400 font-serif-heading italic">I like playing Minecraft</div>
             <p className="text-slate-500 dark:text-slate-400 font-medium max-w-md">Oh yeah, I also program in Python, C++ and do web dev stuff.</p>
             <a href="#contact"
